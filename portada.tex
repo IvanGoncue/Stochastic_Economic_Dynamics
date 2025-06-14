@@ -1,0 +1,1315 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{titling}
+\usepackage{parskip}
+\usepackage{graphicx}
+\usepackage{tocloft} 
+\usepackage{amsmath, amssymb}
+
+
+\geometry{top=3cm, bottom=3cm, left=3cm, right=3cm}
+\setstretch{1.3}
+\pagestyle{empty}
+
+\begin{document}
+	
+	%---------- Portada ----------
+	\begin{titlepage}
+		\centering
+		
+		\textsc{\LARGE Universidad Nacional de Educación a Distancia}\\[1cm]
+		
+		\textsc{\Large Departamento de Teoría Económica y Economía Matemática}\\[2.5cm]
+		
+		{\Huge \bfseries Tesis Final de Máster}\\[0.5cm]
+		
+		{\huge \itshape Tres ensayos sobre dinámica económica estocástica
+			}\\[3cm]
+		
+		% Imagen más grande
+		\includegraphics[width=0.5\linewidth]{imagenes/uned_logo.jpg}\\[2cm]  % Puedes ajustar el valor de width para hacerlo aún más grande o más pequeño
+		
+		% Espacio adicional para mover el texto hacia abajo
+		\vfill
+		
+		\begin{flushright}
+			\textbf{Autor:} Iván González Cuesta\\[0.2cm]
+			\textbf{Tutor:} Dr. Alberto Augusto Álvarez López\\[0.2cm]
+			\textbf{Año:} 2025
+		\end{flushright}
+		
+		\vspace{1cm} % Añadir un poco de espacio al final si es necesario
+	\end{titlepage}
+	
+	
+	\begin{abstract}
+	El crecimiento económico bajo incertidumbre es un tema fundamental en la teoría macroeconómica, con importantes implicaciones para las decisiones de inversión, el diseño de políticas y la estabilidad financiera. Esta tesis presenta un análisis comparativo de tres modelos seminales de crecimiento estocástico: Merton (1975), Brock y Mirman (1972), y Aiyagari (1994). Cada uno de estos modelos aborda la incertidumbre de diferentes maneras, utilizando marcos matemáticos distintos y capturando diferentes mecanismos económicos.
+	
+	El primer ensayo examina el modelo de crecimiento estocástico en tiempo continuo de Merton (1975), que incorpora la incertidumbre mediante procesos de Itô y ecuaciones diferenciales estocásticas. El segundo ensayo analiza el modelo de crecimiento estocástico en tiempo discreto de Brock y Mirman (1972), que introduce aleatoriedad en la función de producción y estudia las propiedades del equilibrio utilizando procesos de Markov y programación dinámica. El tercer ensayo explora el modelo de agentes heterogéneos de Aiyagari (1994), que se centra en el riesgo idiosincrático de ingresos y en las restricciones de liquidez, demostrando cómo el ahorro precaucionario afecta a la acumulación agregada de capital.
+	
+	El análisis comparativo de estos tres modelos destaca las principales diferencias en la forma de modelizar la incertidumbre, las técnicas matemáticas empleadas y las implicaciones económicas. Los resultados proporcionan una base para futuras investigaciones en modelización macroeconómica estocástica, economía financiera y gestión del riesgo.
+
+	\end{abstract}
+
+
+	\newpage
+
+\tableofcontents
+
+\newpage
+
+	
+	\section{Introducción}
+	
+	
+	\subsection{Motivación del estudio}
+	La teoría económica ha evolucionado desde modelos simplificados de crecimiento determinístico hacia enfoques más realistas que reconocen la incertidumbre como un elemento central de los sistemas económicos. En un mundo caracterizado por shocks impredecibles —sean tecnológicos, financieros o sociales—, los modelos tradicionales, como el de Solow (1956) o Ramsey (1928), resultan insuficientes para capturar las dinámicas observadas en el crecimiento económico. Estos modelos asumen trayectorias predecibles para variables como el capital, el consumo o la productividad, ignorando la volatilidad inherente a las economías reales. La introducción de procesos estocásticos en la modelización económica ha permitido superar estas limitaciones, ofreciendo un marco analítico que integra la aleatoriedad y sus efectos sobre las decisiones de los agentes y las trayectorias agregadas.
+	Esta tesis se motiva por la necesidad de comprender cómo la incertidumbre, modelada a través de procesos estocásticos, afecta el crecimiento económico en diferentes contextos teóricos y temporales. Tres enfoques seminales guían este análisis: el modelo de Merton (1975), que incorpora incertidumbre en tiempo continuo; el modelo de Brock y Mirman (1972), que analiza el crecimiento estocástico en tiempo discreto; y el modelo de Aiyagari (1994), que incorpora riesgo idiosincrático y heterogeneidad de agentes. Cada uno de estos trabajos representa un avance significativo en la teoría económica, y su estudio comparativo promete arrojar luz sobre las múltiples dimensiones de la incertidumbre en el crecimiento.
+	
+	\subsection{Importancia de la incertidumbre en los modelos de crecimiento económico}
+	La incertidumbre no es un fenómeno periférico, sino un determinante clave de los resultados económicos. En los modelos determinísticos, el crecimiento se concibe como un proceso lineal impulsado por la acumulación de capital y el progreso tecnológico. Sin embargo, la evidencia empírica —desde las fluctuaciones cíclicas hasta las crisis económicas— demuestra que los shocks aleatorios alteran estas trayectorias de manera significativa. La incorporación de la incertidumbre en los modelos de crecimiento permite analizar cómo los agentes ajustan sus decisiones de consumo, inversión y ahorro ante riesgos impredecibles, y cómo estos ajustes se traducen en dinámicas agregadas.
+	Los modelos estocásticos ofrecen una ventaja adicional: conectan la teoría con aplicaciones prácticas. Por ejemplo, entender los efectos de la incertidumbre agregada o idiosincrática puede informar el diseño de políticas económicas que promuevan la estabilidad y el bienestar. Además, en un contexto global marcado por desafíos como el cambio climático, las pandemias o la volatilidad financiera, los modelos que integran incertidumbre son esenciales para evaluar la resiliencia económica y las desigualdades emergentes. Esta tesis se centra en tres enfoques que abordan estas cuestiones desde perspectivas complementarias: tiempo continuo versus discreto, incertidumbre agregada versus idiosincrática, y decisiones individuales versus dinámicas colectivas.
+	
+	\subsection{Objetivos y contribuciones del trabajo}
+	El objetivo general de esta tesis es analizar el papel de la incertidumbre en el crecimiento económico a través de tres ensayos basados en modelos estocásticos clásicos. Específicamente, se busca:
+	Examinar cómo las decisiones óptimas de consumo e inversión bajo incertidumbre en tiempo continuo, según el modelo de Merton (1975), afectan las dinámicas de crecimiento y su relación con las finanzas.
+	
+	Evaluar las propiedades del crecimiento estocástico en tiempo discreto, siguiendo a Brock y Mirman (1972), y su contraste con enfoques determinísticos.
+	
+	Investigar cómo el riesgo idiosincrático y la heterogeneidad de agentes, en el marco de Aiyagari (1994), influyen en el ahorro agregado y la distribución de la riqueza.
+	Las contribuciones de este trabajo se pueden desglosar en tres aspectos. Primero, ofrece una exposición detallada y actualizada de cada modelo, destacando sus fundamentos matemáticos y económicos. Segundo, realiza un análisis comparativo que identifica las fortalezas, limitaciones y conexiones entre los enfoques y entre tiempo continuo y discreto. Tercero, explora las implicaciones de estos modelos para la teoría macroeconómica moderna y las políticas económicas, abriendo caminos para futuras investigaciones en la teoría del crecimiento.
+	
+	\subsection{Estructura del documento}
+	Esta tesis se organiza en seis capítulos. El capítulo 1 (presente introducción) establece el contexto y los objetivos del estudio. El capítulo 2 presenta el primer ensayo, centrado en el modelo de Merton (1975), analizando el crecimiento bajo incertidumbre en tiempo continuo mediante ecuaciones diferenciales estocásticas. El capítulo 3 desarrolla el segundo ensayo, basado en Brock y Mirman (1972), explorando el crecimiento estocástico en tiempo discreto con programación dinámica. El capítulo 4 aborda el tercer ensayo, inspirado en Aiyagari (1994), examinando el impacto del riesgo idiosincrático en el ahorro y la heterogeneidad. El capítulo 5 ofrece un análisis comparativo de los tres modelos, destacando diferencias metodológicas y sus implicaciones económicas. Finalmente, el capítulo 6 concluye con un resumen de los hallazgos, conexiones con la literatura reciente y sugerencias para investigaciones futuras.
+
+	\section{Crecimiento bajo incertidumbre en tiempo continuo - Merton (1975)}
+	
+	\subsection{Introducción al modelo}
+
+	El punto de partida del modelo es el modelo neoclásico de crecimiento en tiempo continuo, con un solo sector, rendimientos constantes a escala y función de producción estrictamente cóncava sobre el cual introducimos una determinada dinámica estocástica. Concretamente la fuente de incertidumbre escogida por Merton es el tamaño de la población.
+	
+	\subsection{Enfoque matemático: ecuaciones diferenciales estocásticas y procesos de Wiener}
+		
+		En el modelo neoclásico de crecimiento, las principales variables son el capital agregado \( K(t) \), la fuerza de trabajo \( L(t) \) (proporcional al tamaño de la población), y el consumo agregado \( c(t) \). Además, la ecuación de movimiento o de acumulación de capital es:
+		
+		\begin{equation}
+			\dot{k}(t) = F(K(t), L(t)) - \lambda K(t) - C(t),
+		\end{equation}
+		
+		donde \( \lambda \) es la tasa de depreciación del capital, asumida constante y no negativa.
+		
+		Como hemos comentado antes, la fuente de incertidumbre escogida es el tamaño de la población \( L(t) \). Y, para estudiar su distribución estacionaria se estructura el modelo en tiempo continuo y se aproxima mediante un proceso de difusión\footnote{Un proceso de difusión es un tipo de proceso estocástico que describe la evolución de una variable en el tiempo, donde el cambio es continuo y está influenciado por la aleatoriedad. Este tipo de proceso se usa para modelar fenómenos como la dispersión de partículas, la propagación de información o la evolución de precios de activos financieros. Un proceso de difusión se describe generalmente por una ecuación diferencial estocástica (SDE) de la forma \( dX_t = \mu(X_t, t)dt + \sigma(X_t, t)dW_t \), donde \( \mu(X_t, t) \) representa el cambio determinista y \( \sigma(X_t, t) \) es la volatilidad aleatoria.}.
+		Aplicando la teoría de ecuaciones diferenciales estocásticas obtenemos:
+		\begin{equation}
+		dL_t = nL_t \, dt + \sigma L_t \, dZ_t
+		\end{equation}
+		Dónde \( Z_t \) es un proceso de Wiener estándar.
+		
+
+	\subsection{Equilibrio estacionario y dinámica de largo plazo}
+		En modelos estocásticos de crecimiento económico, una pregunta central es si existe una distribución de estado estacionario para el capital por trabajador \( k \), incluso si la trayectoria exacta de \( k \) es incierta. Esta sección estudia dicha distribución bajo incertidumbre.
+			
+		\subsubsection{Distribución en Estado Estacionario del Capital por Trabajador}
+		
+		La dinámica estocástica del capital por trabajador \( k \) está gobernada por un proceso de difusión dado por:
+		
+\begin{equation}
+dk = b(k)\,dt + \sqrt{a(k)}\,dz
+\end{equation}
+		
+	donde $b(k) \equiv [s(k)f(k) - (n + \lambda - \sigma^2)k]$ es el cambio esperado instantáneo en $k$ por unidad de tiempo, y $a(k) \equiv \sigma^2 k^2$ es la varianza instantánea. Por lo tanto, la ecuación de acumulación en unidades \textit{per cápita} sigue un proceso de difusión, y las probabilidades de transición para $k(t)$ están completamente determinadas por las funciones $b(k)$ y $a(k)$.
+	
+Antes de analizar las características distribucionales de $k$, es importante distinguir entre el proceso estocástico de $k$ y el de $K$. Mientras que la trayectoria muestral de $k$ no es diferenciable, la trayectoria muestral de $K$ sí lo es. Dado que en un momento de tiempo $t$ se conocen tanto $K(t)$ como $L(t)$, la producción en ese momento, $F(K, L)$, también se conoce. Además, a partir de (1), $K$ tiene una derivada temporal bien definida que es localmente cierta. Por lo tanto, las participaciones factoriales competitivas están bien definidas y son las mismas que en el modelo determinista. En particular, la tasa de interés, $r$, y el salario, $w$, satisfacen:
+
+	\begin{equation}
+		r = f'(k)
+	\end{equation}
+	
+	y
+	
+	\begin{equation}
+		w = f(k) - kf'(k)
+	\end{equation}
+	
+		
+Podemos estudiar entonces al igual que en el caso determinista la existencia y propiedades cuantitativas del estado estacionario. Sin embargo, en lugar de que haya un punto fijo único $k^*$, en el estado estacionario hay una distribución única de probabilidad para $k$.
+
+Es natural considerar esta distribución como una generalización del caso determinista, el cual es incluido como un caso límite cuando la dispersión tiende a cero.
+
+Como desde ahora y en adelante no nos interesa la mayor parte de los aspectos dinámicos, supondremos que se cumplen las siguientes condiciones suficientes para garantizar la existencia:
+(1) $f(k)$ es cóncava y satisface las condiciones de Inada; 
+(2) $a(k) > 0$ para todo $k < \infty$; 
+(3) $b(k) > 0$ y $a(k) \rightarrow \sigma^2$.
+
+El proceso estocástico para $k$ está completamente determinado por las funciones $b(k)$ y $a(k)$, que a su vez dependen de la función de producción, la función de ahorro, etc. Sin embargo, es posible deducir una representación general funcional para la distribución estacionaria. Sea $\pi_k(x)$ la función de densidad de estado estacionario para la proporción capital-trabajo. Tal como se deduce en el Apéndice B, $\pi_k(x)$ satisface:
+
+\begin{equation}
+	\pi_k(k) = \frac{m}{a(k)} \exp \left[ \int^x \frac{2b(x)}{a(x)}\,dx \right]
+\end{equation}
+
+donde $m$ es una constante tal que
+\[
+\int_0^\infty \pi_k(x)\,dx = 1.
+\]
+Sustituyendo las expresiones para $b(k)$ y $a(k)$ de la ecuación (3) en (6), podemos reescribir (6) como:
+
+\begin{equation}
+\pi_k(k) = mk^{\frac{-2(n + \lambda)}{\sigma^2}} \exp\left[ \frac{2}{\sigma^2} \int^k \frac{s(x)f(x)}{x^2} \, dx \right]
+\end{equation}
+
+La ecuación (7) muestra que la distribución estacionaria se reduce simplemente a calcular una integral definida pero, poco más se puede decir poco sobre $\pi_k(\cdot)$ directamente sin especificar más la función $s(\cdot)$.
+
+	
+\subsubsection{Distribución estacionaria con ahorro constante y función de producción Cobb-Douglas}
+
+Existe una forma funcional específica para $s(\cdot)f(\cdot)$ que no es de poco interés, ya que las distribuciones en estado estacionario de todas las variables económicas pueden resolverse en una economía cerrada. Si se asume que la función de producción es Cobb-Douglas, $f(k) = k^\alpha$, con $0 < \alpha < 1$, y que el ahorro bruto es una fracción constante del producto ($s$ es una constante, $0 < s \leq 1$), entonces al sustituir esta forma funcional particular en la ecuación (7) e integrar, se tiene que $\pi_k(k)$ satisfará
+
+\begin{equation}
+	\pi_k(k) = mk^{\frac{-2(n+\lambda)}{\sigma^2}} \exp\left[ \frac{-2s}{(1-\alpha)\sigma^2} \, k^{-(1-\alpha)} \right].
+\end{equation}
+
+Aunque la constante $m$ podría determinarse mediante integración directa, se aclarará todo el análisis al calcularla de forma indirecta. Si $R \equiv k^{\alpha - 1}$ es la razón capital-producto, y $\pi_R(R)$ es su función de densidad en estado estacionario, entonces, a partir de la ecuación anterior:
+
+\begin{equation}
+	\pi_R(R) = \pi_k(k) / \left| \frac{dR}{dk} \right|
+	= \frac{m}{(1-\alpha)} R^{\gamma-1} e^{-bR},
+\end{equation}
+
+donde $\gamma \equiv \frac{2(\mu + \lambda)}{(1 - \alpha)\sigma^2} > 0$ y $b \equiv \frac{2s}{(1 - \alpha)\sigma^2} > 0$. Por inspección, $R$ tiene una distribución gamma, y por lo tanto $m$ debe satisfacer:
+
+\begin{equation}
+	m = \frac{(1 - \alpha)b^\gamma}{\Gamma(\gamma)},
+\end{equation}
+
+donde $\Gamma(\cdot)$ es la función gamma. Debido a que $R$ tiene una distribución gamma, su función generadora de momentos es:
+
+\begin{equation}
+	\Phi[\theta] \equiv \mathbb{E}\left[e^{\theta R}\right] = \left[1 - \frac{\theta}{b}\right]^{-\gamma},
+\end{equation}
+
+y para momentos no enteros o negativos, se tiene:
+
+\begin{equation}
+	\Phi[\theta] \equiv \mathbb{E}[R^\theta] = \frac{\Gamma(\theta + \gamma)}{\Gamma(\gamma)} b^{-\theta},
+\end{equation}
+
+para $\theta > -\gamma$.
+
+	
+	\subsection{Decisiones óptimas de consumo e inversión - El problema de Ramsey}
+
+En las secciones anteriores se expuso para un estado estable la distribución de la relación capital-trabajo determinado por una política de ahorros bajo incertidumbre. Ahora nos enfocamos en el problema de horizonte finito, que es encontrar una política de ahorros, \( s^*(k, T - t) \), de modo que
+
+		\begin{equation}
+\max E_0 \left\{ \int_0^T U[(1 - s)f(k)] \, dt \right\}
+		\end{equation}
+
+sujeto a \( k(T) \geq 0 \) con probabilidad 1 y donde \( U[\cdot] \) es una función de utilidad de von Neumann-Morgenstern estrictamente cóncava por consumo per cápita para el hombre representativo. La técnica utilizada para resolver el problema es la programación dinámica estocástica. Sea
+
+		\begin{equation}
+J[k(t), t; T] = \max E_t \left\{ \int_t^T U[(1 - s)f(k)] \, dt \right\}
+		\end{equation}
+
+\( J[\cdot] \) se llama la función de Bellman y por el principio de optimalidad, \( J \) debe satisfacer
+
+		\begin{equation}
+0 = \max_{(s)} \left\{ U[(1 - s)f(k)] + \frac{\partial J}{\partial t} + \frac{\partial J}{\partial k} [s f(k) - \beta k] + \frac{1}{2} \sigma^2 k^2 \frac{\partial^2 J}{\partial k^2} \right\}
+		\end{equation}
+
+donde el proceso estocástico para \( k \) satisface (9) y \( \beta = (n + \lambda - \sigma^2) > 0 \). La condición de primer orden para que se cumpla la política óptima \( s^* \) es
+
+		\begin{equation}
+U'[(1 - s^*)f] = \frac{\partial J}{\partial k}
+		\end{equation}
+
+donde \( U'[c] \equiv dU/dc \). Para resolver para \( s^* \) (en principio), se resuelve (27) para \( s^* \) como una función de \( k, T - t \) y \( \partial J/\partial k \), y se sustituye en (26) que se convierte en una ecuación diferencial parcial para la función de \( k \) y \( T - t \).
+
+Debido a la no linealidad de la ecuación diferencial parcial de Bellman, las soluciones en forma cerrada son raras. Sin embargo, en el caso límite de horizonte infinito (\( T \to \infty \)) del caso de Ramsey, el análisis se simplifica sustancialmente porque esta ecuación diferencial parcial se reduce a una ecuación diferencial ordinaria. Como el proceso estocástico para \( k \) es homogéneo en el tiempo y \( U[\cdot] \) no es una función de \( t \), tenemos de (25) que
+
+		\begin{equation}
+\frac{\partial J}{\partial t} = -E_t \left\{ U[(1 - s^*[k, T - t]) f(k(T - t))] \right\}.
+		\end{equation}
+
+Si una política óptima existe, \( f(\cdot) \) satisface las condiciones de Inada, y \( \beta > 0 \), entonces
+
+		\begin{equation}
+\lim_{T \to \infty} s^*(k, T - t) = s^*(k, \infty) = s^*(k),
+		\end{equation}
+
+y del análisis en las secciones previas, existe una distribución de estado estable para \( k \), \( \pi_k^* \), asociada con la política de ahorros \( s^*(k) \). Tomando el límite en (28) tenemos que
+
+		\begin{equation}
+\lim_{T \to \infty} \left\{ \frac{\partial J}{\partial t} \right\} = -E^* \left\{ U[(1 - s^*)f(k)] \right\}
+		\end{equation}
+
+donde \( E^* \) es el operador de expectativa sobre la distribución de estado estable \( \pi_k^* \) y \( B \) es el nivel de utilidad esperada por consumo per cápita en el estado estable óptimo de Ramsey que es independiente de la distribución inicial, \( k(t) \).
+
+De las ecuaciones de Bellman, (26) y (29), tenemos que, al \( T \to \infty \), \( J \) debe satisfacer la ecuación diferencial ordinaria
+
+		\begin{equation}
+0 = U[(1 - s^*)f] - B + J' [s^* f - \beta k] + \frac{1}{2} \sigma^2 k^2 J''
+		\end{equation}
+
+donde las primas denotan derivadas con respecto a \( k^2 \). Diferenciando la condición de primer orden (27) con respecto a \( k \), tenemos que
+
+		\begin{equation}
+J'' = U''[(1 - s^*)f(k)] [(1 - s^*)f'(k) - \frac{d s^*}{d k} f(k)]
+		\end{equation}
+
+sustituyendo para \( J'' \) y \( J' \) de (27) y (31) en (30) y reorganizando términos, podemos reescribir (30) como
+
+		\begin{equation}
+0 = (- \frac{1}{2} \sigma^2 k^2 f U'') \frac{d s^*}{d k} + (f U' - \frac{1}{2} \sigma^2 k^2 U'' f') s^* + \frac{1}{2} \sigma^2 k^2 U'' f' - U' \beta k + U' - B
+		\end{equation}
+
+que es una ecuación diferencial de primer orden para \( s^* \). Nótese que para el caso (degenerado) de incertidumbre (\( \sigma^2 = 0 \)), (32) se reduce a
+
+		\begin{equation}
+(s^* f - \beta k) = \frac{B - U}{U'}
+		\end{equation}
+
+que es la "Regla de Ramsey", donde \( B \) es el "nivel de bliss" de utilidad asociada con el máximo consumo de estado estable y \( k = (s^* f - \beta k) \) a lo largo de la trayectoria óptima de certeza.
+
+En el caso de certeza y sin tener en cuenta la trayectoria de tiempo óptima asociada con
+
+		\begin{equation}
+\max \int_0^\infty U[c] \, dt,
+		\end{equation}
+
+la relación capital-trabajo de estado estable óptimo puede determinarse por la maximización estática de \( U[c(k)] \) en la función de estado estable (i.e., con \( k = 0 \) y \( c(k) = f(k) - \beta k \)). The maximización de todas las funciones de utilidad estrictamente cóncavas es bien conocida (Regla Dorada, \( f'(k^*) = \beta \)). Por lo tanto, es natural preguntarse si existe un método correspondiente usando solo la distribución de estado estable para determinar la política de ahorros óptima bajo incertidumbre.
+
+Para responder a esta pregunta, consideramos el problema de encontrar una política de ahorros, \( s^*(k) \), que maximice la utilidad esperada por consumo per cápita sobre la distribución de estado estable. I.e.
+
+		\begin{equation}
+\max_{(s)} E \left[ U[(1 - s)f(k)] \right] = \max_{(s)} \int_0^\infty U[(1 - s)f(k)] \pi_k(k) \, dk,
+		\end{equation}
+
+que es la generalización natural a la incertidumbre de la maximización estática bajo certeza.
+
+De la ecuación (12), podemos reescribir la función de densidad de estado estable para \( k \) como
+
+		\begin{equation}
+\pi_k(k) = m k^{-\delta} \exp \left[ \frac{2}{\sigma^2} h(k) \right],
+		\end{equation}
+
+donde
+
+		\begin{equation}
+\delta = 2 + \frac{2\beta}{\sigma^2}
+		\end{equation}
+
+		\begin{equation}
+h(k) = \int^k s(x) f(x) x^{-2} \, dx
+		\end{equation}
+
+		\begin{equation}
+\dot{h}(k) = \frac{dh}{dk} = s(k) f(k) k^{-2}
+		\end{equation}
+
+		\begin{equation}
+\dot{h}(k) = \frac{d^2 h}{dk^2} = \frac{d s}{dk} f k^{-2} + s f' k^{-2} - 2 s f k^{-3}
+		\end{equation}
+
+y \( m \) es una constante elegida tal que \( \int_0^\infty k^{-\delta} e^{2h(k)/\sigma^2} \, dk = 1 \). Sustituyendo de (34) para \( \pi_k \) y notando que de (35), \( (1 - s) f = f - k^2 h \), podemos reescribir (33) como el problema de maximización restringido
+
+		\begin{equation}
+\max \left\{ m \int_0^\infty U[f - k^2 h] k^{-\delta} e^{2h(k)/\sigma^2} \, dk + \lambda \left[ 1 - m \int_0^\infty k^{-\delta} e^{2h(k)/\sigma^2} \, dk \right] \right\},
+		\end{equation}
+
+donde \( \lambda \) es el multiplicador usual para la restricción. La inspección de (36) muestra que, formalmente, el independiente a una variable intertemportal de maximización del problema bajo certeza donde el variable independiente es \( k \) en lugar de \( t \). Por lo tanto, ya sea el cálculo de variaciones o el principio máximo pueden emplearse para resolverlo. Las ecuaciones de Euler para (36) pueden escribirse como
+
+		\begin{equation}
+0 = \frac{d}{dk} \left[ U' k^{2 - \delta} e^{\frac{2h(k)}{\sigma^2}} \right] + \frac{2}{\sigma^2} k^{-\delta} e^{\frac{2h(k)}{\sigma^2}} (U - \lambda)
+		\end{equation}
+
+		\begin{equation}
+0 = \int_0^\infty U \pi_k(k) \, dk - \lambda \int_0^\infty \pi_k(k) \, dk
+		\end{equation}
+
+		\begin{equation}
+0 = 1 - m \int_0^\infty k^{-\delta} e^{2h(k)/\sigma^2} \, dk.
+		\end{equation}
+
+Realizando la diferenciación en (37a), sustituyendo para \( h, \dot{h} \) y \( \ddot{h} \) de (35), y reorganizando términos, podemos reescribir (37a) como
+
+		\begin{equation}
+0 = - (U'' k^2 f) \frac{d s^*}{dk} + (- U'' k^2 f' + \frac{2}{\sigma^2} f U') s^* + k^2 f' U'' - \frac{2}{\sigma^2} k U' + \frac{2}{\sigma^2} (U - \lambda),
+		\end{equation}
+
+donde \( s^*(k) \) es la política óptima asociada con (36) y (37).
+
+Una comparación de (38) y (32) muestra que las dos ecuaciones diferenciales son idénticas excepto por los términos constantes \( \lambda \) y \( B \). Sin embargo, de (37b), vemos que
+
+		\begin{equation}
+\lambda = \int_0^\infty U[(1 - s^*)f] \pi_k^*(k) \, dk
+		\end{equation}
+
+		\begin{equation}
+= \max E \left[ U[c] \right]
+		\end{equation}
+
+		\begin{equation}
+= B, \text{ por su definición en (29).}
+		\end{equation}
+Por lo tanto, la política óptima asociada con (36) y la asociada con (24) para \( T = \infty \) son idénticas. I.e. \( s^*(k) = s^*(k) \). Justo en el caso de certeza, el criterio
+
+		\begin{equation}
+\max E_0 \left\{ \int_0^\infty [U - \lambda] \, dt \right\}
+		\end{equation}
+
+tiene la interpretación de minimizar la (esperada) divergencia desde el bliss y claramente en el caso de certeza, \( \lambda \) es la utilidad de máximo consumo sostenible. Una suposición importante. La diferencia en el caso de incertidumbre es que la maximización de estado estable da la política óptima de ahorros para todo tiempo y no solo la asintóticamente óptima de ahorros política. Más aún, mientras que tenemos demostrado la correspondencia entre los dos problemas solo para el caso especial de continuo-time difussion procesos, es probablemente no difícil de tarea para mostrar para general time-homogenous Markov procesos y time-independent utility funciones.
+
+Desafortunadamente, la inspección de (38) muestra que no hay un único óptimo de estado estable distribución para \( k \) para todas las utilidades cóncavas correspondientes al Golden Rule bajo certeza. Sin embargo, hay un caso especial donde unanimidad se obtiene.
+
+Supongamos \( f(k) \) es Cobb-Douglas y vemos el pregunta qué constante ahorros óptima función es óptimal. From the correspondence between (24) with \( T = \infty \) and (36), the problem can be formulated as choose the constant \( s^* \) so as to
+
+		\begin{equation}
+\max_{(s)} \int_0^\infty U[(1 - s) k^\alpha] \pi(k; s) \, dk,
+		\end{equation}
+
+donde de (16) y (18)
+
+		\begin{equation}
+\pi(k; s) = \frac{(1 - \alpha)}{\Gamma(\gamma)} b^\alpha k^{ - \delta} \exp \left[ - b k^{\alpha - 1} \right]
+		\end{equation}
+
+y \( \delta \) es como se definió en (35); \( \gamma = (\delta - 1)/(1 - \alpha) \) y \( b \equiv 2s(1 - \alpha) \sigma^2 \). La condición de primer orden para un máximo en (40) es
+
+		\begin{equation}
+0 = \int_0^\infty \frac{\partial \pi}{\partial s} [U - k^\alpha U'\pi] \, dk.
+		\end{equation}
+
+Definimos \( V(k; s) \equiv U[(1 - s) k^\alpha] \). Notando que \( V' \equiv dV/dk = \alpha (1 - s) k^{\alpha - 1} U' \) y
+
+		\begin{equation}
+\frac{\partial \pi}{\partial s} = \left[ (\gamma / s) - (2k^{\alpha - 1} / ((1 - \alpha) \sigma^2)) \right] \pi,
+		\end{equation}
+
+podemos reescribir (41) como
+
+		\begin{equation}
+0 = \left[ \int_0^\infty \alpha (1 - s^*) \left( \frac{\gamma}{s^*} - \frac{2k^{\alpha - 1}}{(1 - \alpha) \sigma^2} \right) V \pi - k \pi V' \right] \, dk / \alpha (1 - s^*).
+		\end{equation}
+
+
+Usando integración por partes, tenemos que
+		\begin{equation}
+\int_0^\infty (k\pi) V' dk = V k\pi \Big|_0^\infty - \int_0^\infty V \frac{d}{dk} (k\pi) dk
+		\end{equation}
+		\begin{equation}
+= 0 - \int_0^\infty V \frac{d}{dk} (k\pi) dk
+		\end{equation}
+
+por la definición de $\pi$ y la concavidad de $V$. Usando $d(k\pi)/dk = [1 + b^*(1 - \alpha) k^{\alpha - 1} - \delta] \pi$ en (42) y sustituyendo (42) en (41), podemos reescribir (41) como
+		\begin{equation}
+0 = \int_0^\infty V \left\{ \left[ b^*(1 - \alpha) - \frac{2\alpha(1 - s^*)}{(1 - \alpha)\sigma^2} \right] k^{\alpha - 1} + \left[ \frac{\alpha(1 - s^*)^2\gamma}{s^*} + 1 - \delta \right] \right\} dk.
+		\end{equation}
+
+Por inspección, el integrando de (43) será idénticamente cero para todo $V$, $\pi$ y $k$ si $s^* = \alpha$. Por lo tanto, en la clase de reglas de ahorro constantes con una función de producción Cobb-Douglas, la regla óptima es $s^* = \alpha$ para todos los maximizadores de utilidad cóncava.
+
+	
+	\subsection{Relación con modelos deterministas}
+	
+	El modelo de crecimiento estocástico de Merton es un enfoque clave en la teoría del crecimiento económico, especialmente en su interpretación de cómo la incertidumbre afecta el crecimiento del capital per cápita en una economía.
+	
+	\subsubsection{Modelo de Merton}
+	El modelo de Merton se basa en una extensión del modelo neoclásico, pero incorpora incertidumbre en el proceso de crecimiento económico. En lugar de suponer que el crecimiento es completamente predecible y determinado por los parámetros del modelo, el modelo de Merton introduce una variable estocástica, como la población, que sigue un proceso estocástico. Esto significa que, además de la evolución determinista de la economía, se incluye un componente aleatorio que captura la incertidumbre.
+	
+	
+	\subsubsection{Modelos Deterministas}
+	En contraste, los modelos deterministas, como el de Solow, suponen que el crecimiento económico se produce de acuerdo con un conjunto fijo de parámetros, sin la influencia de elementos aleatorios. En estos modelos, las variables como el capital y la población evolucionan de manera predecible y dependen únicamente de las decisiones económicas y las políticas establecidas.
+	
+	Por ejemplo, el modelo de Solow asume que el capital crece de acuerdo con una función de producción determinista:
+	
+\begin{equation}
+	\dot{k} = sf(k) - (\delta+n) K
+\end{equation}
+	
+	donde \(s\) es la tasa de ahorro, \(Y\) es el producto total, y \(\delta\) es la tasa de depreciación. En este enfoque, el crecimiento económico es completamente determinado por las decisiones sobre el ahorro y la inversión, y no se considera la incertidumbre que podría alterar estos procesos.
+	
+	\subsubsection{Comparación y Diferencias Fundamentales}
+	\begin{itemize}
+		
+		\item \textbf{Impacto en el Bienestar}: El crecimiento económico en un modelo determinista puede ser eficiente y sin fricciones, pero el modelo estocástico de Merton destaca cómo la volatilidad y los choques aleatorios afectan al bienestar económico. A medida que la incertidumbre aumenta, el crecimiento esperado de la población disminuye, lo que introduce un nivel de riesgo sobre el bienestar que no está presente en los modelos deterministas.
+		
+		\item \textbf{Estabilidad y Equilibrio}: Los modelos deterministas suelen tener puntos de equilibrio bien definidos y predecibles. En el modelo de Merton, la incertidumbre hace que el equilibrio sea más difuso, ya que el sistema no sigue una trayectoria determinista, sino que las fluctuaciones pueden empujar a la economía hacia diferentes caminos a lo largo del tiempo.
+	\end{itemize}
+
+	El modelo de Merton puede verse como una generalización de los modelos deterministas, en los que se introduce el concepto de incertidumbre para hacer el análisis más realista y cercano a las condiciones económicas del mundo real. Mientras que los modelos deterministas proporcionan una imagen clara del crecimiento económico bajo supuestos muy controlados, los modelos estocásticos, como el de Merton, nos permiten entender los efectos del riesgo y la incertidumbre sobre el futuro de la economía, lo que es esencial para la toma de decisiones en condiciones de riesgo y para comprender las dinámicas de los mercados financieros.
+	
+
+	\section{Crecimiento Estocástico en Tiempo Discreto - Brock \& Mirman (1972)}
+	
+	\subsection{Introducción al modelo}
+	El modelo de Brock y Mirman (1972) es una extensión del modelo de crecimiento económico neoclásico que introduce la incertidumbre de manera explícita en la función de producción a través de una variable aleatoria \( r_t \). 	
+	
+	En este modelo, la producción depende no solo de las variables tradicionales como el capital (\( K_t \)) y el trabajo (\( L_t \)), sino también de un shock aleatorio \( r_t \) que afecta la productividad en cada período de tiempo.
+	
+	Este modelo estocástico trata de capturar las fluctuaciones en el crecimiento económico derivadas de factores inciertos que no pueden preverse completamente, pero que impactan de manera significativa el nivel de producción y, en última instancia, la evolución económica. La ecuación fundamental del modelo es:
+	
+\begin{equation} 
+	Y_t = F(K_t, L_t, r_t) 
+\end{equation}
+	
+	donde \( Y_t \) es la producción total, \( K_t \) es el capital en el tiempo \( t \), \( L_t \) es el trabajo y \( r_t \) es el shock estocástico en la productividad. En términos per cápita, esta producción se puede reescribir como:
+	
+\begin{equation}
+	y_t = f(x_t, r_t) \quad \text{con} \quad x_t = k_t 
+\end{equation}
+	
+	
+	Las propiedades de la función de producción, de forma similar al modelo neoclásico pero ampliadas para capturar la icnertidumbre serían:
+	\begin{enumerate}
+		\item \( f(0, \rho) = 0 \), es decir, no hay capital, no hay producción.
+		\item \( f'(X, \rho) > 0 \), el producto marginal del capital es positivo.
+		\item \( f''(X, \rho) < 0 \), rendimientos marginales decrecientes.
+	\end{enumerate}
+	
+	Además, se satisfacen las condiciones de Inada:
+	
+\begin{equation}
+	\lim_{X \to 0} f'(X, \rho) = \infty
+\end{equation}
+\begin{equation}
+	\lim_{X \to \infty} f'(X, \rho) = 0
+\end{equation}
+	
+	Todas estas condiciones, garantizan que siempre es óptimo acumular capital, pero a un ritmo decreciente.
+	
+	En resumen, el mdoelo se utiliza para analizar cómo los agentes económicos reaccionan ante la incertidumbre y cómo esta afecta a las decisiones de consumo e inversión, además de evaluar las propiedades del equilibrio estocástico a largo plazo.
+	
+	
+	\subsection{Enfoque de programación dinámica y procesos de Markov}
+
+ Sea \( \Omega_t \) el conjunto de posibles estados del mundo que influyen en el proceso de producción en el momento \( t \). Un elemento típico de \( \Omega_t \) sería \( \omega_t \), que representa la ocurrencia, por ejemplo, de una epidemia de una determinada proporción en el tiempo \( t \).
+
+Sea \( \mathcal{F}_t \) una colección de subconjuntos de \( \Omega_t \) sobre los cuales se definen probabilidades. Un miembro típico de \( \mathcal{F}_t \) sería el conjunto de \( \omega_t \in \Omega_t \), que implican que la participación laboral en el período es inferior al 90\% debido a una epidemia. Se asume que \( \mathcal{F}_t \) es una \( \sigma \)-álgebra de subconjuntos de \( \Omega_t \).
+
+A lo largo de este artículo se usarán conceptos probabilísticos o de teoría de la medida. No obstante, solo se emplearán los conceptos más básicos de la teoría de la medida. Para una discusión de estos conceptos, véase Loeve [7].
+
+Sea \( P_t \) una función, una medida de probabilidad definida sobre \( \mathcal{F}_t \), que asigna una probabilidad a cada elemento de \( \mathcal{F}_t \), es decir, para cualquier conjunto \( F_t \in \mathcal{F}_t \), la probabilidad de que el estado del mundo \( \omega \) en el tiempo \( t \) sea un elemento de \( F_t \) está dada por:
+
+		\begin{equation}
+P_t(F_t) = \Pr[\omega_t \in F_t].
+		\end{equation}
+
+Se asume que el espacio de probabilidad \( (\Omega, \mathcal{F}, P) \) es el mismo en cada período. Por lo tanto, para simplificar, se omitirán los subíndices de tiempo, y el espacio de estados se denotará simplemente como \( (\Omega, \mathcal{F}, P) \).
+
+Para traducir los sucesos aleatorios en valores medibles, que son necesarios para la función de producción, se introduce la variable aleatoria \( r_t \). La función \( r_t \) lleva el espacio de medida \( (\Omega, \mathcal{F}, P) \) a la recta real \( (\mathbb{R}, \mathcal{B}) \), donde \( \mathcal{B} \) es la colección de subconjuntos de \( \mathbb{R} \) sobre la cual se puede definir una medida de probabilidad (usualmente se toma el conjunto de los conjuntos de Borel, Loeve [7]).
+
+Así, \( r_t: \Omega \to \mathbb{R} \) tal que \( r_t^{-1}(B) \in \mathcal{F} \) para todo \( B \in \mathcal{B} \), donde:
+
+		\begin{equation}
+r_t^{-1}(B) = \{ \omega \in \Omega : r_t(\omega) \in B \}.
+		\end{equation}
+
+Se asume que las variables aleatorias \( r_t \) son independientes e idénticamente distribuidas (i.i.d.). Por conveniencia, los subíndices de tiempo solo se usarán cuando sea necesario distinguir eventos en distintos períodos.
+
+Las suposiciones de que el espacio de medida que representa los estados del mundo es independiente del tiempo, y que las variables aleatorias son i.i.d., son suposiciones fuertes que se hacen por simplicidad analítica. Los resultados de este trabajo pueden generalizarse al caso en que las \( r_t \) no son independientes ni idénticamente distribuidas. No obstante, la suposición de que el espacio \( (\Omega, \mathcal{F}, P) \) es independiente del tiempo parece ser crucial para el teorema del límite presentado en este artículo.
+
+La aplicación \( r: \Omega \to \mathbb{R} \) genera una medida sobre los subconjuntos de Borel de la recta real, que denotamos \( \nu(\cdot) \). La aplicación se define como:
+
+		\begin{equation}
+\nu(r \in S) = \Pr\{ \omega \in r^{-1}(S) \},
+\quad \text{donde } r^{-1}(S) = \{ \omega : r(\omega) \in S \},
+\quad \forall S \in \mathcal{B}.
+		\end{equation}
+
+Por lo tanto, las estadísticas de los "estados del mundo" aleatorios se representan mediante la variable aleatoria numérica \( r \) con medida asociada \( \nu(\cdot) \).
+
+Una forma sencilla de entender la medida \( \nu(\cdot) \) es considerar el caso en que \( r \) solo puede tomar dos valores posibles. Supongamos:
+
+		\begin{equation}
+r = 1 \text{ con probabilidad } p, \quad
+r = 2 \text{ con probabilidad } 1 - p.
+		\end{equation}
+
+Entonces, si \( S \) es cualquier conjunto tal que \( 1 \notin S \) y \( 2 \notin S \), entonces \( \nu(S) = 0 \). Si \( 1 \in S \) y \( 2 \notin S \), entonces \( \nu(S) = p \). Si \( 2 \in S \) y \( 1 \notin S \), entonces \( \nu(S) = 1 - p \). Finalmente, si \( 1, 2 \in S \), entonces \( \nu(S) = 1 \).
+
+Se asume que el evento aleatorio \( r \) incrementa o disminuye la producción para todos los valores de \( x \), y que los eventos aleatorios están indexados de forma tal que:
+
+\begin{equation}
+	\frac{\partial f(x, r)}{\partial r} > 0 \quad \text{para todo } x,
+\end{equation}
+
+Además, se asume que el evento aleatorio solo puede afectar la producción de una manera “compacta”. Es decir, existen números \( 0 < \alpha < \beta < \infty \) tales que para todo \( x > 0 \) y \( r \in [\alpha, \beta] \), se cumple:
+
+		\begin{equation}
+\infty > f(x, \beta) > f(x,\alpha) > 0. \tag{1.3}
+		\end{equation}
+
+En esta discusión se asume, sin pérdida de generalidad, que para cada \( \rho > \alpha \), se cumple \( \nu([\alpha, \rho]) > 0 \). Si no fuera así, se podría simplemente tomar \( \alpha = \sup \{ q : \nu((0, q]) = 0 \} \). De manera similar, se cumple \( \nu([p, \beta]) > 0 \) para cada \( p < \beta \).
+
+
+\subsubsection{Restricciones del Modelo}
+
+El modelo se formula en términos de la ecuación de evolución del capital per cápita:
+\begin{equation}
+c_t + x_t = f(x_{t-1}, r_{t-1}),
+\end{equation}
+donde $c_t$ es el consumo per cápita. La política de consumo $c_t$ es óptima cuando maximiza la utilidad esperada del agente representativo. La función de utilidad $u(c)$ cumple:
+\begin{itemize}
+	\item $u'(c) > 0$, el consumo genera utilidad,
+	\item $u''(c) < 0$, la utilidad marginal es decreciente,
+	\item $u(0) = 0$, para evitar soluciones triviales.
+\end{itemize}
+
+El problema de maximización del agente es:
+\begin{equation}
+\max \mathbb{E} \left[ \sum_{t=0}^{\infty} \delta^t \cdot u(c_t) \right],
+\end{equation}
+sujeto a:
+
+\begin{equation}
+	c_t + x_t = f(x_{t-1}, r_{t-1}),
+\end{equation}
+
+
+\begin{equation}
+	c_0 + x_0 = s,
+\end{equation}
+
+\begin{equation}
+	x_t \ge 0,
+\end{equation}
+\begin{equation}
+	c_t \geq 0.
+\end{equation}
+
+
+donde $\delta$ es la tasa de descuento intertemporal.
+
+\subsubsection{Restricción de Sostenibilidad del Capital}
+
+Aquí \( s > 0 \) es el dato inicial dado del problema, que representa el stock de capital inicial. También se da la tasa de descuento subjetiva, la cual está acotada por \( 0 < \delta < 1 \). Nótese que se asume que la inversión es reversible. Esta suposición permite la posibilidad de que \( x_{t+1} < x_t \).
+
+A partir de la definición de \( \beta \) y de las condiciones impuestas sobre la función de producción, existe un \( x_\beta \) tal que, para todo \( x > x_\beta \),
+
+		\begin{equation}
+f(x,\beta)<x
+		\end{equation}
+
+Por lo tanto, el capital no puede mantenerse sin importar el estado del mundo si \( x > x_\beta \).
+
+
+\subsubsection{Política Óptima y Ecuación Funcional}
+
+Para cualquier stock de capital inicial \( s \), existe una solución al problema de maximización que, por la estricta concavidad, es única. A partir de los argumentos habituales de programación dinámica, la política óptima de consumo en el período \( t \) puede escribirse en la forma:
+
+
+\begin{equation}
+	c_t = g(f(x_{t-1}, r_{t-1})).
+\end{equation}
+
+que se deduce sabiendo que el capital y el consumo óptimos en cada periodo están dados por:
+\begin{equation}
+x_t = f(x_{t-1}, r_{t-1}) - g(f(x_{t-1}, r_{t-1})),
+\end{equation}
+
+Que podemos a su vez reescribir de manera compacta como:
+\begin{equation}
+x_t = H(x_{t-1}, r_{t-1}),
+\end{equation}
+donde $H(x_{t-1}, r_{t-1})$ es una función creciente que relaciona la inversión óptima con el capital previo y el shock estocástico.
+
+La ecuación de Euler para la política óptima se expresa como:
+\begin{equation}
+u'(g(f(x_{t-1}, r_{t-1}))) = E[\beta u'(g(f(x_t, r_t)))] f'(x_t, r_t).
+\end{equation}
+Este es el principio de optimalidad de Bellman, que establece que el consumo óptimo hoy debe igualar la utilidad marginal esperada del consumo futuro, descontado y ajustada por la productividad marginal del capital.
+
+
+\subsection{Propiedades del equilibrio en crecimiento estocástico}
+
+\subsubsection{Convergencia y Solución Estacionaria}
+
+Sea $\mu_t$ la medida asociada con los posibles valores de las variables aleatorias $x_t$. Las medidas $\mu_t$ se definen como:
+
+		\begin{equation}
+\mu_t(B) = \Pr(x_t \in B), \quad t = 0, 1, 2, \ldots
+		\end{equation}
+
+El valor $\mu_t(B)$ representa la probabilidad de que el stock óptimo de capital en el tiempo $t$, denotado por $x_t$, pertenezca al conjunto $B$.
+
+Sea $F_t(x)$ la función de distribución asociada con la medida $\mu_t$. La función de distribución y la medida están relacionadas de la siguiente forma:
+
+		\begin{equation}
+F_t(x) = \Pr(X_t \leq x) = \mu_t([0, x))
+		\end{equation}
+
+Sea $P(x, B)$ la función de transición de probabilidad del proceso. Esta función representa la probabilidad de que el stock de capital esté en el conjunto $B$ un periodo después de haber comenzado en el estado $x$. Es decir, si el stock de capital en el tiempo $t$ es $X_t = x$, entonces la probabilidad de que $X_{t+1} \in B$ es $P(x, B)$. Nótese que $P(x, \cdot)$ es una función medible como consecuencia del teorema de Fubini. Simbólicamente:
+
+		\begin{equation}
+P(x, B) = \Pr(H(x, r) \in B) = \Pr(r \in B_x) = \nu(B_x)
+		\end{equation}
+
+donde $H(x, r)$ es una función que lleva los stocks de capital a otros stocks de capital, y
+
+		\begin{equation}
+B_x = \{ \eta : H(x, \eta) = y,\ y \in B \}
+		\end{equation}
+
+siendo \( B \in \mathcal{B} \) el conjunto de conjuntos de Borel sobre los reales positivos.
+
+La función de distribución $F_t$ y las medidas $\mu_t$ sobre los stocks de capital son generadas por la función de transición de probabilidad mediante:
+
+		\begin{equation}
+\mu_t(B) = \int P(\xi, B) \, \mu_{t-1}(d\xi)
+		\end{equation}
+
+Intuitivamente, esto significa que la probabilidad de tener un stock de capital en el conjunto $B$ en el tiempo $t$ es la probabilidad de haber tenido un stock de capital $\xi$ en el periodo $t-1$ multiplicada por la probabilidad de pasar de $\xi$ al conjunto $B$. Esto se suma sobre todos los posibles valores de $\xi$ en el tiempo $t-1$.
+
+Es útil en este punto introducir la función inversa de $H(x, r)$ respecto a su primer argumento. Esta función inversa juega un papel importante en la demostración de la convergencia de la secuencia de funciones de distribución que se discutirá más adelante.
+
+La función $q(y, r)$ se define en términos de la función $H$ mediante:
+
+		\begin{equation}
+H(q(y, r), r) = y
+		\end{equation}
+
+Esta función está bien definida ya que $H$ es estrictamente creciente en su primer argumento. La función $q$ puede considerarse como generadora de un proceso estocástico:
+
+		\begin{equation}
+q(x_t, r_t) = x_{t-1}
+		\end{equation}
+
+Este proceso estocástico es, en sentido temporal, inverso al generado por la función $H$. En adelante, a este proceso se le llamará el \textit{proceso inverso}.
+
+Las medidas $\mu_t(B) = \Pr(x_t \in B)$ para $t = 0, 1, 2, \ldots$ y la función de transición de probabilidad $P(\cdot, \cdot)$ pueden caracterizarse explícitamente en términos de la medida $\nu$ y de la función inversa $q$. Recordemos que $\nu$ es la medida que determina el comportamiento estadístico de la variable aleatoria $r$.
+
+La función de transición de probabilidad se convierte entonces en:
+
+		\begin{equation}
+P(x, B) = \Pr(H(x, r) \in B) = \Pr(x \in q(B, r))
+		\end{equation}
+
+donde
+
+		\begin{equation}
+q(B, r) = \{ x = q(y, r) \; ; \; y \in B \}
+		\end{equation}
+
+Aquí $q(B, r)$ es el conjunto de posibles stocks de capital desde los cuales se puede alcanzar algún elemento del conjunto $B$, dado que $r$ representa el "estado del mundo" vigente.
+
+Las medidas $\mu_t(B)$ se expresan entonces como:
+
+		\begin{equation}
+\mu_t(B) = \int P(\xi, B) \, \mu_{t-1}(d\xi)
+		\end{equation}
+
+Si se define una \textit{distribución en estado estacionario} como cualquier medida que satisfaga la ecuación:
+
+		\begin{equation}
+\mu^*(B) = \int P(x, B) \, \mu(dx)
+		\end{equation}
+
+entonces, para nuestro proceso estocástico, una distribución estacionaria $\mu^*$ debe cumplir dicha propiedad.
+
+Intuitivamente, para que $\mu^*$ sea una medida en estado estacionario, la probabilidad $\mu^*(B)$ de estar en el conjunto $B$ debe permanecer constante de un periodo a otro. Este concepto de estado estacionario es análogo al caso determinista, en el que el stock de capital permanece constante en el tiempo. En el caso aleatorio, la distribución del stock de capital se mantiene constante a lo largo del tiempo.
+
+
+
+	\subsection{Relación con modelos deterministas}
+	En un modelo determinista, no hay incertidumbre en la evolución del capital. Es decir, se trataría del caso en que el shock estocástico \(r_t\) es reemplazado por una constante \(r\), lo que implica que el sistema es predecible en cada período. A continuación, se presentan las ecuaciones clave del modelo determinista:
+	
+	\subsubsection{Modelo determinista}
+	El modelo de crecimiento ha sido explorado, notablemente, por Cass \cite{cass} y Koopmans \cite{koopmans}.  
+	El principal resultado del trabajo de Cass-Koopmans es la existencia de una solución en estado estacionario que, en el caso descontado, se conoce como la \textit{regla de oro modificada}. 
+	Además, las políticas óptimas en el caso determinista poseen propiedades de estabilidad interesantes. 
+	Más precisamente, el stock de capital óptimo converge hacia la trayectoria de la regla de oro modificada desde cualquier punto inicial.
+	
+	En esta sección, la técnica de programación dinámica será utilizada para obtener los resultados de Cass-Koopmans de una forma muy simple y directa. 
+	Este ejercicio tiene por objeto ilustrar la técnica que será empleada en las siguientes dos secciones. 
+	El uso de esta técnica produce resultados en la teoría estocástica que son análogos a los de Cass-Koopmans.
+	
+	Considera el problema:
+	
+		\begin{equation}
+	\max \sum_{t=0}^{\infty} \delta^t U(C_t)
+		\end{equation}
+	
+	sujeto a:
+	
+		\begin{equation}
+	c_0 + x_0 = s
+		\end{equation}
+		\begin{equation}
+	c_t + c_t = f(x_{t-1}), \quad t = 1, 2, \dots
+		\end{equation}
+	
+	Como en el caso aleatorio discutido anteriormente, existe, por la estricta concavidad, una solución única al problema de maximización para cada $s$. Esta puede escribirse como $x_0 = h(s)$. 
+	Además, por consideraciones de programación dinámica (por ejemplo, ver Levhari y Srinivasan \cite{levhari}), existe una función de política $h(\cdot)$ tal que:
+	
+		\begin{equation}
+	x_t = h(f(x_{t-1}))
+		\end{equation}
+	
+	Además, $h(\cdot)$ es una función creciente y continua con $h(0) = 0$.
+	
+	La condición necesaria para un máximo genera la ecuación funcional:
+	
+		\begin{equation}
+	u'(c_t) = \delta u'(c_{t+1}) f'(x_t)
+		\end{equation}
+	
+	Aquí,
+	
+		\begin{equation}
+	c_t = f(x_{t-1}) - x_t, \quad c_{t+1} = f(x_t) - x_{t+1}
+		\end{equation}
+	
+	La ecuación anterior determina el comportamiento en estado estacionario y la dinámica de la trayectoria de crecimiento. Estas condiciones son análogas a las ecuaciones de Euler del cálculo de variaciones.
+	
+	Sustituyendo los valores óptimos en la ecuación, esta se reduce a:
+	
+		\begin{equation}
+u'\left(g\left(f(x_{t-1})\right)\right) = \delta \, u'\left(g\left(f(x_t)\right)\right) f'(x_t)
+		\end{equation}
+	
+	donde definimos las funciones:
+	
+		\begin{equation}
+a(x) = u'\bigl(g(f(x))\bigr), \quad b(x) = \delta \, a(x) f'(x)
+		\end{equation}
+	
+	Dado que $g(\cdot)$ es una función creciente, tanto $a(x)$ como $b(x)$ son funciones decrecientes.
+	
+Además, 
+		\begin{equation}
+d(x) = \frac{b(x)}{a(x)} = \delta f'(x)
+		\end{equation}
+por lo que \( d(x) \) decrece en \( x \) y \( d(\infty) = 0 \), \( d(0) = \infty \). Por lo tanto, existe un único \( x^* \) tal que \( a(x^*) = b(x^*) \). Aquí, \( x^* \) es precisamente la regla de oro modificada. Además, a partir de la Ec. (2.6) se observa fácilmente que para \( x < x^* \):
+
+	\begin{center}
+		\begin{minipage}{0.48\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{imagenes/prueba.jpg}
+		\end{minipage}
+		\hfill
+		\begin{minipage}{0.48\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{imagenes/fig2.jpg}
+		\end{minipage}
+	\end{center}
+	
+	\subsection{Comparación con el modelo de Merton (diferencias en tiempo continuo vs. discreto)}
+	
+	El modelo de Brock y Mirman se diferencia del modelo de Merton (1975) en el tratamiento del tiempo. Mientras que el modelo de Brock y Mirman se basa en un enfoque discreto del tiempo, el modelo de Merton se desarrolla en un contexto de tiempo continuo. Esta diferencia tiene implicaciones importantes en la formulación matemática del modelo y en las decisiones óptimas de consumo e inversión.
+	
+	En el modelo de Merton, la dinámica del capital se describe mediante una ecuación diferencial estocástica en tiempo continuo, lo que permite una modelización más fluida de las decisiones de los agentes. Por otro lado, en el modelo de Brock y Mirman, las decisiones de consumo e inversión se toman en intervalos discretos, lo que da lugar a un tratamiento más sencillo del proceso de optimización, pero también implica que el análisis no puede aprovechar las propiedades del cálculo estocástico en tiempo continuo.
+	
+	Además, en el modelo de Merton, el consumo y la inversión son funciones continuas del tiempo, lo que significa que las decisiones pueden ajustarse de manera más suave a las variaciones en el capital y la productividad. En cambio, en el modelo discreto de Brock y Mirman, las decisiones de consumo e inversión se toman en momentos discretos, lo que puede hacer que las políticas óptimas sean más sensibles a los choques estocásticos en momentos específicos.
+	
+	
+\section{Riesgo idiosincrático y ahorro agregado - Aiyagari (1994)}
+
+\subsection{Introducción al modelo}
+
+El modelo de Aiyagari (1994) introduce riesgo idiosincrático no asegurado y restricciones de crédito en una economía con agentes heterogéneos e infinitamente vivientes. Su objetivo principal es estudiar cómo estas fricciones afectan al ahorro agregado, la acumulación de capital y la determinación endógena de tasas de interés y salarios. Este enfoque permite derivar un equilibrio general dinámico que conecta decisiones individuales y agregados macroeconómicos.
+
+\subsection{Heterogeneidad de agentes y restricciones de crédito}
+
+Para simplificar, asumimos que los shocks de dotación laboral (equivalentemente, ingresos) son i.i.d. a lo largo del tiempo.\footnote{En el análisis cuantitativo se permite que el shock de dotación laboral esté correlacionado serialmente, de modo que se presenten efectos de anticipación.} También permitimos cierto nivel de endeudamiento.\footnote{El propósito de permitir endeudamiento es enfatizar que solo sirve para reducir el ahorro agregado y la tasa de ahorro. Es decir, el impacto sobre la tasa de ahorro sería aún menor si se permitiera endeudamiento.} Sea $c_t$, $a_t$ y $l_t$ el consumo, los activos y la dotación laboral en el periodo $t$, respectivamente. Sea $U(c)$ la función de utilidad por periodo, $\beta$ el factor de descuento intertemporal, con $\lambda = \frac{1 - \beta}{\beta} > 0$ como la tasa de preferencia temporal, $r$ el rendimiento de los activos, y $w$ el salario.
+
+El problema del individuo es maximizar:
+
+\begin{equation}
+	\mathbb{E}_0 \sum_{t=0}^{\infty} \beta^t U(c_t)
+\end{equation}
+
+sujeto a:
+
+\begin{align}
+	c_t + a_{t+1} &= w l_t + (1 + r) a_t \\
+	c_t &\geq 0, \quad a_t \geq -b \quad \text{c.s.}
+\end{align}
+
+donde $b$ (si es positivo) es el límite de endeudamiento y $l_t$ se asume i.i.d. con soporte acotado $[l_{\min}, l_{\max}]$, siendo $l_{\min} > 0$.
+
+Es apropiado discutir aquí la restricción de endeudamiento. Claramente, si $r < 0$, se requiere algún límite al endeudamiento, de lo contrario, el problema no está bien planteado y no existe un máximo. El valor presente de los ingresos es infinito (c.s.) y nada impide que el individuo ejecute un esquema Ponzi. Si $r > 0$, entonces una alternativa menos restrictiva que imponer un límite fijo al endeudamiento es imponer el equilibrio presupuestario en valor presente (c.s.), lo que equivale a requerir que:
+
+		\begin{equation}
+\lim_{t \to \infty} \frac{a_t}{(1 + r)^t} \geq 0 \quad \text{(c.s.)}
+		\end{equation}
+
+Esta condición, junto con la no negatividad del consumo, es equivalente a la restricción:
+
+		\begin{equation}
+a_t \geq -\frac{w l_{\min}}{r} \quad \text{(c.s.)}
+		\end{equation}
+
+Por tanto, una restricción de endeudamiento está necesariamente implícita en la no negatividad del consumo. Además, si $b > \frac{w l_{\min}}{r}$, la restricción no será vinculante y $b$ puede ser reemplazada por el valor menor $\frac{w l_{\min}}{r}$. Por tanto, sin pérdida de generalidad, podemos especificar la restricción como $a_t \geq -\phi$
+
+\begin{equation}
+	  \phi=
+	\begin{cases}
+		\min\left\{b, \frac{w l_{\min}}{r}\right\} & \text{si } r > 0 \\
+		b & \text{si } r \leq 0
+	\end{cases}
+\end{equation}
+
+Si la restricción $b$ es más estricta que $\frac{w l_{\min}}{r}$ (por ejemplo, si $b = 0$ y no se permite endeudamiento), entonces puede considerarse una restricción ad hoc.
+
+Ahora definimos:
+
+\begin{align}
+	\bar{a}_t &= a_t + \phi \\
+	z_t &= w l_t + (1 + r) \bar{a}_t - r \phi
+\end{align}
+
+donde $z_t$ puede interpretarse como los recursos totales del agente en el periodo $t$. Usando estas definiciones, la ecuación presupuestaria queda como:
+
+\begin{align}
+	c_t + \bar{a}_{t+1} &= z_t \\
+	z_{t+1} &= w l_{t+1} + (1 + r) \bar{a}_{t+1} - r \phi
+\end{align}
+
+Sea $V(z_t; b, w, r)$ la función de valor óptimo para el agente con recursos totales $z_t$. Esta función es la solución única de la ecuación de Bellman:
+
+\begin{equation}
+	V(z_t; b, w, r) = \max_{\bar{a}_{t+1}} \left\{ U(z_t - \bar{a}_{t+1}) + \beta \mathbb \int \left[ V(z_{t+1}; b, w, r) dF(l_{t+1}) \right] \right\}\
+\end{equation}
+
+sujeto a las restricciones derivadas. La regla óptima de demanda de activos del agente viene dada por una función continua y unívoca:
+
+\begin{equation}
+	\bar{a}_{t+1} = A(z_t; b, w, r)
+\end{equation}
+
+Sustituyendo esto en la ecuación de transición, obtenemos la ley de evolución para los recursos totales:
+
+\begin{equation}
+	z_{t+1} = w l_{t+1} + (1 + r) A(z_t; b, w, r) - r \phi
+\end{equation}
+
+
+
+\subsection{Equilibrio general}
+
+
+La distribución de $\{z_t\}$ y el valor de $E_a^w$ reflejan la heterogeneidad endógena y las características agregadas mencionadas en la introducción. $E_a^w$ representa los activos agregados de la población que son coherentes con la distribución de activos entre la población, implícita en el comportamiento óptimo de ahorro individual. En la Figura IIa mostramos la forma típica del gráfico de $E_a^w$ frente a $r$ (la curva marcada $E_a^w(\phi)$).
+
+
+\begin{center}
+	\includegraphics[width=1\linewidth]{imagenes/aiyagari.jpg}\\[1cm]
+\end{center}
+
+La característica más importante de este gráfico es que $E_a^w$ tiende a infinito cuando $r$ se aproxima desde abajo a la tasa de preferencia temporal $\lambda$.\footnote{La condición clave aquí es que el coeficiente de aversión relativa al riesgo esté acotado \cite[Aiyagari 1993a, Proposición 4]. Esta condición se viola, por ejemplo, con la utilidad exponencial negativa, en cuyo caso existen valores de $r$ menores que $\lambda$ y una distribución de probabilidad para $\{\ell_t\}$ con soporte acotado tal que los activos del consumidor divergirán a infinito casi con certeza (véase \cite[Schechtman y Escudero 1977], págs. 159--161).}
+
+Esto refleja el horizonte infinito de los consumidores. Si $r$ es igual o superior a la tasa de preferencia temporal, entonces el individuo acumulará una cantidad infinitamente grande de activos, y $E_a^w$ puede considerarse infinito. Intuitivamente, si $r$ excede a $\lambda$, entonces el individuo querrá posponer el consumo hacia el futuro y actuar como prestamista. El perfil de consumo será creciente, y el agente acumulará una cantidad infinitamente grande de activos para financiar un consumo también infinito en el futuro lejano.
+
+Esta conclusión se mantiene también en el caso límite en que $r = \lambda$. En este caso, el consumidor intenta mantener un perfil de utilidad marginal del consumo suave. En el margen, adquirir una unidad adicional del activo no tiene coste. Sin embargo, dado que existe una probabilidad positiva de recibir una sucesión suficientemente larga de malas realizaciones de los choques laborales, mantener una utilidad marginal suave solo es posible si el consumidor dispone de una cantidad arbitrariamente grande de activos para amortiguar dichos choques.
+
+A continuación, observamos que para valores de $r < \lambda$, $E_a^w$ es siempre mayor bajo incertidumbre que si las ganancias fueran ciertas, al menos mientras $r$ no sea mucho menor que $\lambda$; es decir, mientras los activos no sean demasiado costosos de mantener. Este resultado es independiente de si $U'$ es convexa o cóncava, y surge debido a la restricción de endeudamiento y al horizonte infinito. En un problema de un solo consumidor con un horizonte de dos períodos, no hay heterogeneidad, y la restricción de endeudamiento puede ignorarse haciendo suposiciones adecuadas sobre el perfil temporal de las ganancias. Sin embargo, con horizonte infinito, choques recurrentes y $r < \lambda$, ni la heterogeneidad ni la restricción de endeudamiento pueden ser ignoradas.
+
+Si las ganancias fueran ciertas (o, equivalentemente, los mercados completos), $E_a^w$ sería igual a $-\phi$ para todo $r < \lambda$. Es decir, los activos per cápita bajo certidumbre están en su nivel mínimo permitido ya que todos los agentes son iguales y todos están restringidos. Sin embargo, en un estado estacionario bajo mercados incompletos, existe una distribución de agentes con diferentes recursos totales reflejando distintas historias de choques laborales. Aquellos con bajos recursos totales seguirán estando restringidos por liquidez, mientras que aquellos con altos recursos totales acumularán activos por encima del nivel restringido independientemente de la convexidad de la utilidad marginal, simplemente porque sus recursos actuales son elevados en relación con los futuros recursos promedio. La agregación implica entonces que los activos per cápita deben necesariamente exceder su nivel bajo certidumbre.
+
+
+
+\subsection{Distribución de activos y desigualdad}
+
+Las características cruciales que explican cómo los \textit{shocks} idiosincráticos no asegurados y las restricciones de endeudamiento conducen a un mayor ahorro agregado son las siguientes:
+
+\begin{enumerate}
+	\item El valor esperado de los activos agregados por hogar, denotado por \( E a \), es finito solo si la tasa de interés \( r \) es menor que la tasa de preferencia temporal \( \lambda \).
+	\item Este valor esperado tiende a infinito cuando \( r \to \lambda^- \).
+\end{enumerate}
+
+Sea \( f(k,1) \) la función de producción per cápita, donde \( k \) es el capital por trabajador y el trabajo está normalizado a uno. Sea \( \delta \) la tasa de depreciación del capital.
+
+Consideramos la curva etiquetada como \( K(r) \) en la Figura IIb, que muestra el capital demandado por las empresas como función de la tasa de interés \( r \), definida por la condición de primer orden de la maximización de beneficios del productor:
+
+		\begin{equation}
+r = f_1(k,1) - \delta
+		\end{equation}
+
+Bajo supuestos estándar, esta curva es decreciente: tiende a infinito cuando \( r \to -\delta \), y tiende a cero cuando \( r \to \infty \).
+
+El salario \( w \) también se puede expresar como función de \( r \), dado que \( w = f_2(k,1) \). Denotamos esta relación como \( w(r) \), que también es una función decreciente del tipo de interés: \( w(r) \to 0 \) cuando \( r \to \infty \), y \( w(r) \to \infty \) cuando \( r \to -\delta \).
+
+Para un valor dado de \( r \), sea \( E a \) el valor esperado de los activos bajo el salario \( w(r) \). Llamamos a la curva que representa esta relación \( NI \) (``No Asegurado''), y está graficada como función de \( r \). El estado estacionario de esta economía se caracteriza por el punto de intersección:
+
+		\begin{equation}
+K(r) = E a(r)
+		\end{equation}
+		
+Este equilibrio está representado en la Figura IIb como el punto \( e_n \). Intuitivamente:
+\begin{itemize}
+	\item \( K(r) \): capital demandado por las firmas.
+	\item \( E a(r) \): capital ofrecido por los hogares.
+\end{itemize}
+
+\subsubsection{Comparación con una economía con mercados completos}
+
+Consideremos ahora una economía sin incertidumbre, es decir, con mercados de seguros completos. En ese caso, un agente representativo recibe el mismo ingreso \( w \) cada periodo. Entonces:
+
+\begin{itemize}
+	\item Si \( r < \lambda \): el agente estará siempre restringido por su límite de crédito y mantendrá activos iguales a \( -\phi \).
+	\item Si \( r = \lambda \): los activos se mantendrán constantes e iguales al nivel inicial.
+	\item Si \( r > \lambda \): el agente acumulará activos sin límite.
+\end{itemize}
+
+La curva correspondiente a este caso, etiquetada como \( FI \) (``Full Insurance''), se compone de un segmento horizontal en \( r = \lambda	 \), y un segmento vertical desde el punto \( -\phi \). El equilibrio en este caso se da en el punto \( e_f \).
+
+\subsubsection{Conclusión}
+
+Este análisis muestra que:
+\begin{itemize}
+	\item El stock de capital agregado es mayor.
+	\item La tasa de interés de equilibrio es menor.
+\end{itemize}
+
+\noindent
+en una economía con \textit{shocks} idiosincráticos no asegurados y restricciones de endeudamiento, en comparación con una economía con seguro completo y agente representativo.
+Asimismo, la tasa de ahorro:
+
+		\begin{equation}
+\text{Tasa de ahorro} = \frac{\delta k}{f(k,1)}
+		\end{equation}
+
+\noindent
+es mayor en la economía con restricciones y sin seguro.
+
+En resumidas cuentas, podemos concluir que de acuerdo al modelo, al  aumentar la incertidumbre (manteniendo la media constante) se reduce el consumo y aumenta el ahorro para cada nivel de riqueza.
+Esto incrementa la demanda de activos y, por tanto, el ahorro precautorio.
+
+\subsection*{Efectos de relajar la restricción de crédito}
+
+Sea \( b \) el límite de endeudamiento. En un análisis de equilibrio parcial:
+
+\begin{itemize}
+	\item Si \( r = -1 \) -rentabilidad bruta de los activos nula-: el agente mantiene activos \( -b \) permanentemente.
+	\item Si \( r = 0 \): el límite de endeudamiento no afecta la demanda de activos, pero sí el valor agregado \( E a \), que cae una unidad por cada unidad adicional de crédito permitido.
+\end{itemize}
+
+Esto sugiere que un mayor acceso al crédito (elevar el límite de endeudamiento) desplaza la curva \( E a(r) \) hacia la izquierda, lo que implica:
+
+\begin{itemize}
+	\item Menor capital agregado.
+	\item Mayor tasa de interés.
+\end{itemize}
+
+
+
+
+\subsection{Implicaciones macroeconómicas}
+
+El modelo de Aiyagari demuestra cómo la heterogeneidad y las restricciones generan:
+\begin{itemize}
+	\item Un ahorro agregado mayor al de modelos sin fricciones.
+	\item Una tasa de interés de equilibrio más baja.
+	\item Una desigualdad de activos consistente con observaciones empíricas, aunque con menor magnitud.
+\end{itemize}
+Este marco ha inspirado extensiones hacia modelos HANK y macroeconomía con heterogeneidad.
+
+\subsection{Relación con modelos anteriores y consideraciones de política económica}
+
+Mientras que los modelos anteriores suponen un agente representativo y mercados perfectos, el enfoque de Aiyagari introduce \textit{heterogeneidad de agentes}, \textit{riesgo idiosincrático} y \textit{restricciones de crédito}, lo que permite estudiar fenómenos ausentes en los marcos agregados tradicionales.
+
+Desde un punto de vista determinista, Aiyagari puede interpretarse como una extensión significativa del modelo neoclásico de crecimiento de Ramsey, en el que los individuos maximizan su utilidad intertemporal bajo restricciones presupuestarias. En ausencia de incertidumbre y restricciones de endeudamiento, el equilibrio de Aiyagari colapsa en el de un modelo representativo sin fricciones, donde todos los agentes tienen idénticas dotaciones y trayectorias de ingreso, y se observa una distribución degenerada de activos. La introducción de incertidumbre idiosincrática genera un incentivo adicional al ahorro —el \textit{ahorro precautorio}— que no aparece en los modelos deterministas, y cuya magnitud depende críticamente de la volatilidad del ingreso y la severidad de las restricciones de crédito.
+
+En contraste con el modelo de Merton, que aborda incertidumbre agregada mediante un proceso continuo de Wiener y se centra en el crecimiento del capital per cápita en un entorno fluido, Aiyagari opera en tiempo discreto y con procesos de Markov, más aptos para representar decisiones individuales realistas bajo restricciones. A diferencia de Brock y Mirman, que también trabajan en tiempo discreto pero en un contexto de agente representativo con shocks agregados, el modelo de Aiyagari permite estudiar la distribución de riqueza y los efectos agregados de las decisiones individuales heterogéneas, en especial en presencia de mercados incompletos.
+
+Estas características convierten al modelo en una herramienta poderosa para analizar implicaciones de \textit{política económica}. Por ejemplo, puede utilizarse para estudiar los efectos redistributivos de un sistema de impuestos progresivos, de transferencias sociales condicionadas o de esquemas de seguro público de ingresos. La imposibilidad de asegurar completamente los riesgos idiosincráticos amplifica la desigualdad, lo que hace que políticas de transferencia puedan mejorar el bienestar agregado incluso en ausencia de externalidades. Asimismo, las restricciones de endeudamiento agravan la acumulación desigual de activos, lo cual afecta no solo la equidad, sino también el equilibrio macroeconómico a través de la determinación endógena de la tasa de interés.
+
+En resumen, el modelo de Aiyagari aporta una capa de realismo fundamental al análisis macroeconómico al capturar cómo la \textit{desigualdad}, las \textit{fricciones financieras} y la \textit{heterogeneidad} estructuran la economía agregada. Al mismo tiempo, complementa a modelos como los de Merton y Brock y Mirman al ampliar el foco desde la dinámica del capital agregado hacia la distribución individual de recursos y la capacidad de los agentes para hacer frente al riesgo. Esta perspectiva es particularmente relevante en contextos contemporáneos donde la estabilidad macroeconómica está estrechamente ligada a la resiliencia individual frente a la incertidumbre.
+
+
+
+
+
+
+
+
+
+\section{Análisis comparativo de los tres modelos}
+
+\subsection{Diferencias en la modelización de la incertidumbre}
+
+\subsubsection{Incertidumbre agregada vs. idiosincrática}
+
+Una de las principales diferencias entre los tres modelos analizados tiene que ver con el tipo de incertidumbre que incorporan y el modo en que esta afecta a las decisiones de los agentes y a las variables macroeconómicas. El modelo de Merton (1975) introduce \textit{incertidumbre agregada} directamente sobre la evolución de la población, una variable clave del sistema. Al modelar la población como un proceso de difusión, la aleatoriedad afecta a todos los agentes de manera simultánea, implicando una fuente común de riesgo. Este tipo de incertidumbre tiene consecuencias directas sobre el capital per cápita y, en última instancia, sobre la senda de crecimiento económico.
+
+Por el contrario, el modelo de Aiyagari (1994) se centra en la \textit{incertidumbre idiosincrática}, es decir, aquella que afecta de manera individual a cada agente. En su formulación, los trabajadores enfrentan shocks no asegurados de ingresos, que son independientes entre individuos y no pueden ser mutualizados. Esta clase de incertidumbre da lugar a un comportamiento de ahorro precaucionario y a una distribución heterogénea de activos, lo que permite analizar cuestiones como la desigualdad de riqueza y el papel de las restricciones de crédito.
+
+El modelo de Brock y Mirman (1972), situado a medio camino, introduce aleatoriedad en la función de producción a través de un shock que puede interpretarse como un componente agregado. Sin embargo, al no incorporar heterogeneidad de agentes, no permite estudiar los efectos distributivos de la incertidumbre.
+
+En resumen, mientras Merton y Brock y Mirman se centran en riesgos que afectan a la economía en su conjunto, Aiyagari abre la puerta al estudio de la microfundamentación de los comportamientos individuales bajo riesgo y su impacto macroeconómico agregado.
+
+\subsubsection{Uso de procesos de Wiener vs. procesos de Markov}
+
+Otra distinción clave radica en las herramientas matemáticas empleadas para modelar la incertidumbre, es decir, el tipo de proceso estocástico utilizado. Merton adopta un enfoque continuo en el tiempo mediante procesos de Wiener, los cuales permiten capturar trayectorias continuas y una dinámica suave pero aleatoria de las variables de interés. Esta elección exige el uso de cálculo estocástico (en particular, el Lema de Itô) y facilita la obtención de ecuaciones diferenciales estocásticas que caracterizan el sistema. El uso de procesos de difusión permite, además, derivar soluciones analíticas para distribuciones estacionarias y estudiar el comportamiento de momentos económicos en el largo plazo.
+
+En contraste, tanto Brock y Mirman como Aiyagari utilizan procesos de Markov en tiempo discreto para modelar la incertidumbre lo que implica una estructura de transición entre estados definida por una matriz de probabilidades finita (en el caso discreto como suele suponerse al computar Aiyagari) o una función de densidad de transición (si el espacio de estados es continuo como sucede en el modelo de Brock y Mirman dónde nos encontramos ante cadenas de Markov en espacios de Borel). Esta elección metodológica facilita la implementación computacional, ya que permite utilizar la programación dinámica como herramienta de resolución, aplicando métodos recursivos  para encontrar funciones de valor y reglas de decisión óptimas.
+
+Sin embargo, el uso del tiempo discreto y de procesos de Markov con soporte finito impone ciertas restricciones analíticas. Al renunciar al marco continuo, se pierde la posibilidad de aplicar directamente herramientas del cálculo estocástico, como el Lema de Itô o las ecuaciones de Fokker-Planck, que permiten derivar soluciones analíticas o caracterizar distribuciones estacionarias con mayor generalidad. En este sentido, el análisis de las trayectorias económicas bajo incertidumbre se vuelve más dependiente de la simulación numérica y de métodos computacionales.
+
+Los procesos de Markov, por su parte, capturan de forma estructurada la evolución estocástica del sistema económico, permitiendo modelar cómo las decisiones presentes dependen del estado actual, pero no del pasado (propiedad de Markov). Esta característica hace posible definir una política óptima en términos de funciones recursivas que se resuelven mediante técnicas numéricas iterativas, como el método de iteración sobre funciones de valor o el método de iteración sobre funciones de política. En el caso de Aiyagari, por ejemplo, la dinámica de los ingresos idiosincráticos de los agentes está gobernada por un proceso de Markov finito, lo que permite calcular la política óptima de ahorro individual y la distribución estacionaria de activos como resultado de un equilibrio general.
+
+Este enfoque recursivo ha sido clave en el desarrollo de la macroeconomía computacional moderna, ya que permite estudiar dinámicas de equilibrio complejas, incorporar heterogeneidad y fricciones, y evaluar el impacto cuantitativo de diferentes fuentes de incertidumbre o cambios en la política económica.
+
+\subsection{Metodología matemática y enfoque técnico}
+
+\subsubsection{EDS y control estocástico vs. programación dinámica}
+
+La metodología matemática empleada en cada modelo es reflejo directo del tipo de incertidumbre, del marco temporal y de la variable objetivo a estudiar. Merton hace uso del control estocástico en tiempo continuo, abordando el problema de optimización intertemporal mediante ecuaciones diferenciales estocásticas (EDS). Este enfoque permite derivar reglas de comportamiento óptimas como podría ser por ejemplo el caso de la tasa de ahorro en función del capital que obtuvimos mediante una generalización estocástica del problema clásico de Ramsey. Tambien permite encontrar la distribución estacionaria del capital per cápita utilizando herramientas como la ecuación de Fokker-Planck.
+
+Por otro lado, tanto Brock y Mirman como Aiyagari adoptan un enfoque en tiempo discreto basado en programación dinámica. En estos marcos, el problema de decisión intertemporal del agente se formula como una ecuación funcional de Bellman, en la cual el valor presente del programa óptimo se define recursivamente en términos del valor futuro descontado. 
+En el modelo de Brock y Mirman, la función de valor depende únicamente del capital per cápita y del shock agregado de productividad, y el agente representativo resuelve el problema suponiendo expectativas racionales. En este contexto, la política óptima puede interpretarse como una función que asigna a cada estado de la economía (capital y shock) una decisión de consumo o inversión.
+
+Aiyagari, en cambio, extiende esta formulación al introducir agentes heterogéneos que enfrentan shocks idiosincráticos de ingresos, y además están sujetos a restricciones de endeudamiento. Esto hace que la función de valor dependa tanto del nivel de activos individuales como del estado de ingresos del agente. La política óptima que se deriva de la solución de Bellman indica cuánto consume y ahorra cada agente en función de su situación particular, y se utiliza posteriormente para construir la distribución estacionaria de activos en equilibrio general.
+
+El uso de programación dinámica tiene la ventaja de su aplicabilidad numérica directa. El valor y la política óptima se obtienen mediante métodos iterativos, técnicas bien conocidas en macroeconomía computacional. Sin embargo, esta metodología raramente permite derivar expresiones analíticas cerradas, especialmente cuando se incluyen fricciones, heterogeneidad o múltiples fuentes de incertidumbre. Como resultado, la intuición económica debe extraerse a partir de simulaciones, ejercicios de sensibilidad paramétrica o análisis de bienestar comparado bajo distintas configuraciones.
+
+En suma, la ecuación de Bellman se convierte en el núcleo computacional de los modelos de decisión en tiempo discreto bajo incertidumbre. A través de ella, se operacionaliza el principio de optimalidad dinámica introducido por Richard Bellman (1957), adaptado en este caso al contexto económico de consumo, ahorro y acumulación de capital bajo riesgo. 
+
+
+\subsubsection{Modelos continuos vs. discretos}
+
+La elección entre modelos continuos o discretos tiene implicaciones no solo técnicas, sino también conceptuales. El modelo de Merton, al estar formulado en tiempo continuo, permite una representación más rica y matizada de los procesos económicos. Se pueden capturar cambios infinitesimales en el capital o en la población, y modelar respuestas instantáneas a shocks. Este enfoque es particularmente útil en el análisis financiero, donde los precios de los activos siguen trayectorias continuas y la evaluación de derivados requiere estructuras de tiempo infinitesimal.
+
+Los modelos discretos, en cambio, son más realistas en términos de frecuencia de decisión. En la práctica, los agentes económicos toman decisiones de consumo, inversión y trabajo en intervalos regulares (mensuales, trimestrales, anuales), lo cual hace que los modelos en tiempo discreto sean más naturales desde una perspectiva empírica. Además, su resolución computacional es más directa, lo que los hace atractivos para calibración e inferencia empírica.
+
+\subsection{Implicaciones en política económica y teoría macroeconómica}
+
+\subsubsection{Crecimiento óptimo y decisiones de inversión}
+
+Los tres modelos tienen implicaciones relevantes para el estudio del crecimiento económico bajo incertidumbre. Merton muestra cómo el riesgo agregado afecta el crecimiento esperado del capital per cápita, y cómo la política óptima de ahorro puede derivarse en función de los parámetros de la economía. Su análisis permite estudiar el impacto de la volatilidad sobre el bienestar y sobre la acumulación de capital en el largo plazo.
+
+Brock y Mirman, por su parte, evidencian que incluso bajo shocks de productividad, los agentes siguen un principio de optimalidad intertemporal, maximizando utilidad esperada sujeta a la dinámica estocástica del capital. El modelo permite estudiar cómo la incertidumbre reduce el incentivo a invertir hoy, generando un efecto de precaución que puede frenar el crecimiento agregado.
+
+Aiyagari introduce un elemento esencial: las decisiones de inversión no dependen solo del retorno esperado, sino también de la necesidad de autoseguro frente a shocks individuales. Este comportamiento microfundamentado genera una acumulación agregada de capital mayor que la del modelo determinista, y permite entender fenómenos como la “sobreacumulación” en economías con mercados incompletos.
+
+\subsubsection{Restricciones de crédito y desigualdad}
+
+El modelo de Aiyagari proporciona un marco poderoso para analizar la desigualdad de riqueza y el rol de las restricciones financieras. Los agentes enfrentan restricciones de no endeudamiento, lo cual limita su capacidad para suavizar el consumo frente a shocks adversos. Como resultado, se genera una distribución de activos altamente desigual en equilibrio, donde algunos agentes acumulan activos por encima del nivel de precaución, mientras que otros permanecen cerca de la restricción.
+
+Este tipo de modelos tiene implicaciones directas sobre el diseño de políticas redistributivas, programas de aseguramiento público y regulación del acceso al crédito. En contraste, ni Merton ni Brock y Mirman pueden abordar directamente estos temas, al estar formulados en términos de un agente representativo o al no incluir restricciones al comportamiento.
+
+\subsubsection{Relevancia para modelos modernos de crecimiento y finanzas}
+
+La influencia de estos tres modelos sobre la macroeconomía contemporánea es indiscutible. El modelo de Merton ha sido fundamental en el desarrollo de las finanzas en tiempo continuo y en la teoría de valoración de activos, estableciendo puentes entre macroeconomía y finanzas cuantitativas. El enfoque de Brock y Mirman ha sido base para el desarrollo de modelos DSGE y teoría de ciclos reales, al demostrar cómo la incertidumbre agregada genera fluctuaciones endógenas.
+
+Finalmente, el modelo de Aiyagari representa una piedra angular en la literatura de agentes heterogéneos, con aplicaciones que van desde la política fiscal óptima hasta la macroeconomía del consumo, el desempleo y la educación. Su formulación ha sido extendida para incorporar cambios tecnológicos, dinámica demográfica y mercados financieros incompletos.
+
+\subsection{Fortalezas y limitaciones de cada enfoque}
+
+Cada uno de los modelos estudiados presenta ventajas metodológicas y económicas, pero también limitaciones que deben tenerse en cuenta al aplicarlos.
+
+El modelo de Merton destaca por su precisión analítica y su capacidad de generalización a contextos financieros. Sin embargo, su carácter agregado y la ausencia de fricciones lo alejan del comportamiento observado en economías reales. Además, la resolución requiere un conocimiento avanzado de matemáticas aplicadas, lo cual puede limitar su aplicabilidad empírica.
+
+El modelo de Brock y Mirman, por su simplicidad y potencia didáctica, es ideal para entender cómo la incertidumbre agregada afecta las decisiones macroeconómicas básicas. Sin embargo, su falta de heterogeneidad limita su uso en el estudio de desigualdad o fricciones financieras.
+
+El modelo de Aiyagari es computacionalmente exigente, y requiere iteraciones sobre distribuciones de agentes y precios de equilibrio. No obstante, su riqueza estructural permite captar una amplia gama de fenómenos económicos contemporáneos, haciendo de él una herramienta esencial en la investigación aplicada.
+
+En conclusión, la comparación entre estos tres modelos revela una evolución clara en la forma de incorporar la incertidumbre en la teoría macroeconómica. Desde un enfoque agregado y analítico (Merton), pasando por modelos representativos con shocks (Brock y Mirman), hasta una economía con agentes heterogéneos y restricciones reales (Aiyagari), la teoría ha avanzado hacia una comprensión más completa y realista del crecimiento económico bajo riesgo.
+
+
+\section{Conclusión y futuras investigaciones}
+
+\subsection{Resumen de los hallazgos principales}
+
+El análisis comparativo desarrollado a lo largo de esta tesis ha puesto de manifiesto las diferencias clave entre los modelos de Merton (1975), Brock y Mirman (1972) y Aiyagari (1994) en su tratamiento de la incertidumbre, la metodología matemática empleada y las implicaciones macroeconómicas. Mientras que Merton incorpora incertidumbre agregada mediante procesos de Wiener y ecuaciones diferenciales estocásticas, Brock y Mirman y Aiyagari adoptan una formulación discreta basada en procesos de Markov y programación dinámica. La principal aportación del modelo de Aiyagari es la inclusión de heterogeneidad y restricciones de crédito, lo que permite derivar una distribución endógena de riqueza y analizar su impacto sobre el equilibrio general.
+
+El estudio ha mostrado cómo la incertidumbre idiosincrática induce un ahorro precautorio agregado, generando una sobreacumulación de capital y una tasa de interés de equilibrio más baja que en economías sin fricciones. Asimismo, se ha destacado la relevancia de la distribución estacionaria de activos, que presenta asimetrías.
+
+\subsection{Conexiones con modelos recientes de crecimiento y finanzas cuantitativas}
+
+Los resultados obtenidos encuentran conexiones directas con desarrollos recientes en la literatura de crecimiento económico y finanzas cuantitativas. El enfoque de Merton ha influido en el campo de las finanzas, especialmente en el desarrollo de la valoración de opciones y los modelos de valoración continua de activos. Por su parte, el modelo de Brock y Mirman ha inspirado la arquitectura de los modelos DSGE y de ciclos reales, utilizados ampliamente en análisis macroeconómico moderno.
+
+El modelo de Aiyagari, con su incorporación de heterogeneidad y restricciones, constituye una base fundamental para los recientes modelos HANK (Heterogeneous Agent New Keynesian), que combinan la heterogeneidad microeconómica con rigideces nominales y políticas monetarias no lineales. Estos modelos permiten capturar la transmisión desigual de la política económica y las dinámicas de consumo y ahorro en presencia de shocks idiosincráticos persistentes.
+
+\subsection{Posibles extensiones a nuevos marcos teóricos e implicaciones para futuras investigaciones en macroeconomía}
+
+
+La investigación en macroeconomía como en tantos otros campos, está experimentando una rápida evolución, impulsada por la creciente disponibilidad de datos y por avances en las herramientas analíticas y computacionales. 
+
+Creo que herramientas como la modelización estocástica, las ecuaciones en derivadas parciales, la teoría de la medida, el análisis numérico o el machine learning ofrecen un marco riguroso para modelar dinámicas económicas y prometen avances significativos en la estimación y calibración de modelos dinámicos complejos lo que ayuda a proporcionar una representación más rica de las interconexiones entre agentes, sectores y mercados.
+
+Más allá de las extensiones específicas de los modelos aquí analizados, considero que la macroeconomía contemporánea debe nutrirse de los desarrollos avanzados en finanzas cuantitativas y matemáticas aplicadas. Aunque las finanzas cuantitativas suelen ser tratadas como una especialidad matemática independiente, muchos de los elementos que aborda —como los tipos de interés, los riesgos sistémicos o la propagación de shocks— son igualmente fundamentales para la macroeconomía. Esto invita a una integración más estrecha entre ambos campos, superando su tratamiento como disciplinas desconectadas.
+
+En síntesis, el futuro de la macroeconomía considero, ha de pasar por un enfoque integrador que combine fundamentos microeconómicos sólidos, herramientas matemáticas avanzadas y capacidades computacionales de última generación, lo que permitirá una comprensión más profunda de los fenómenos económicos complejos y una conexión más estrecha entre teoría, datos y aplicaciones.
+
+También quisiera subrayar que la matematización, por sí sola, no basta para hacer macroeconomía y puede conducirnos a un reduccionismo que termine por vaciar de significado las relaciones económicas. Asimismo, debemos evitar caer en un fetichismo matemático, dejándonos deslumbrar por la sofisticación formal de nuestros modelos y llegando a confundir precisión matemática con comprensión real.
+
+
+\appendix
+\newpage
+\section{APÉNDICE: Diferencial estocástica para la relación capital-trabajo}
+
+Para determinar la diferencial estocástica para la relación capital-trabajo, \( k = K/L \), aplicamos el Lema de Itô de la siguiente manera:
+
+\[
+k = K/L = G(L, t)
+\]
+
+\[
+\frac{\partial G}{\partial L} = -\frac{K}{L^2} = -\frac{k}{L}
+\]
+
+\[
+\frac{\partial^2 G}{\partial L^2} = \frac{2K}{L^3} = \frac{2k}{L^2}
+\]
+
+\[
+\frac{\partial G}{\partial t} = \frac{K'}{L} = (sf(k) - \lambda k)\]
+
+Desde el Lema de Itô,
+
+\[
+dk = \frac{\partial G}{\partial L} dL + \frac{\partial G}{\partial t} dt + \frac{1}{2} \frac{\partial^2 G}{\partial L^2} (dL)^2.
+\]
+
+Desde (2) y el Lema de Itô, tenemos que
+
+\[
+dL = nLdt + \sigma LdZ
+\]
+
+\[
+(dL)^2 = \sigma^2 L^2 dt.
+\]
+
+Sustituyendo de las expresiones anteriores, tenemos que
+
+\[
+dk = \left( -\frac{k}{L} (nLdt + \sigma LdZ) + (sf(k) - \lambda k)dt + \frac{1}{2} \left( \frac{2k}{L^2} \right) \sigma^2 L^2 dt \right)
+\]
+
+\[
+= [sf(k) - (\lambda + n - \sigma^2)k]dt - \sigma k dZ.
+\]
+
+\newpage
+\section{APÉNDICE: Distribución de estado estable para un proceso de difusión}
+
+Sea \( X(t) \) la solución a la ecuación de Itô
+
+\[
+dx = b(x)dt + \sqrt{a(x)} dZ,
+\]
+
+donde \( a(\cdot) \) y \( b(\cdot) \) son funciones \( C^2 \) en \([0, \infty)\) con \( a(x) > 0 \) en \((0, \infty)\) y \( a(0) = b(0) = 0 \). Entonces, \( X(t) \) describe un proceso de difusión tomando valores en el intervalo \([0, \infty)\) con \( X = 0 \) y \( X = \infty \) estados absorbentes. Es decir, si \( X(t) = 0 \), entonces \( X(\tau) = 0 \) para \( \tau > t \) y similarmente, si \( X(t) = \infty \).
+
+Sea \( p(X, t; X_0) \) la densidad de probabilidad condicional para \( X \) en el tiempo \( t \), dado \( X(0) = X_0 \). Porque \( X(t) \) es un proceso de difusión, su transición de densidad funcionará con la ecuación de Fokker-Planck "forward" (Feller [4, p. 326] y Cox y Miller [2, p. 215]),
+
+\[
+\frac{1}{2} \frac{\partial^2}{\partial x^2} [a(x)p(x, t; X_0)] - \frac{\partial}{\partial x} [b(x)p(x, t; X_0)] = \frac{\partial p(x, t; X_0)}{\partial t}.
+\]
+
+Supongamos que \( X \) tiene una distribución de estado estable, independiente de \( X_0 \). Es decir,
+
+\[
+\lim_{t \to \infty} p(X, t; X_0) = \pi(x).
+\]
+
+Entonces, \(\lim_{t \to \infty} (\partial p / \partial t) = 0\), y \(\pi\) satisfará
+
+\[
+\frac{1}{2} \frac{d^2}{dx^2} [a(x)\pi(x)] - \frac{d}{dx} [b(x)\pi(x)] = 0.
+\]
+
+\begin{itemize}
+	\item Por métodos estándar, se puede integrar (B.3) dos veces para obtener una solución formal para \(\pi(x)\); a saber,
+	
+	\[
+	\pi(x) = m_1 I_1(x) + m_2 I_2(x),
+	\]
+	
+	donde
+	
+	\[
+	I_1(x) = \frac{1}{a(x)} \exp \left[ 2 \int^x \frac{b(y)}{a(y)} dy \right]
+	\]
+	
+	y
+	
+	\[
+	I_2(x) = \frac{1}{a(x)} \int^x \exp\left[ 2 \int_y^x \frac{b(s)}{a(s)} \, ds \right] \, dy
+	\]
+
+	
+	y \( m_1 \) y \( m_2 \) son constantes a ser elegidas de modo que
+	
+	\[
+	\int_0^\infty \pi(x)dx = 1.
+	\]
+	
+	Mientras que la solución formal es directa, la prueba de existencia y determinación de los constantes es más difícil. Formalmente, una distribución de estado estable solo existirá si el proceso de difusión tiene una función de transición que se aproxima a \(\pi(x)\) cuando \( t \to \infty \) (véase el texto).
+	
+	
+	
+	Tenemos que
+
+	\[
+		b(k) = \mathbb{E}[s(k) f(k) - (n + \lambda - \sigma^2) k]
+			\]
+
+	y
+
+	\[
+		a(k) = \sigma^2 k^2
+		\]
+
+	
+donde $f(k)$ es una función cóncava satisfaciendo $\lim_{k \to 0} f'(k) = 0$, $0 < \varepsilon \leq s(k) \leq 1$ y $n + \lambda - \sigma^2 > 0$.
+
+	El método de prueba es comparar el proceso estocástico generado por (xx) con otro proceso estocástico que se sabe que tiene fronteras inaccesibles y luego mostrar que la probabilidad de que $k$ alcance sus fronteras es no mayor que la probabilidad que el proceso de comparación alcanza sus fronteras.
+	
+	Usando el Lemma (Apéndice A), podemos escribir la ecuación diferencial estocástica para $x = \log k$ como
+	
+\[
+dx = h(x) dt - \sigma dz
+\]
+	donde
+	
+\[
+	h(x) = e^{-x} \cdot s(e^x) \cdot f(e^x) - (n + \lambda - \frac{1}{2} \sigma^2)
+\]
+	Usando las suposiciones de que $0 < \varepsilon \leq s(e^x)$ y $f'(0) = \infty$ junto con la Regla de L'Hôpital, tenemos que
+	\[
+		\lim_{x \to -\infty} h(x) = \infty
+		\]
+	y análogamente, usando las suposiciones de que $s(e^x) \leq 1$ y $f'(\infty) = 0$, tenemos que
+\[
+		\lim_{x \to \infty} h(x) = - (n + \lambda - \frac{1}{2} \sigma^2) < 0.
+\]
+	
+	Por continuidad, existe un $x_1 > -\infty$ tal que para todo $x \in [-\infty, x_1]$, existe un $\delta_1 > 0$ tal que
+\[
+		h(x) \geq h(x_1) \geq \delta_1 > 0.
+\]
+	Similarmente, existe un $\overline{x} < \infty$ tal que para todo $x \in [\overline{x}, \infty]$, existe un $\delta_2 < 0$ tal que
+\[
+		h(x) \leq h(\overline{x}) \leq \delta_2 < 0.
+\]
+	
+	Consideremos un proceso de Wiener $W_1(t)$ con deriva $\delta_1$ y varianza $\sigma^2$ definido en el intervalo $[-\infty, x_1]$ donde $x$ es una barrera reflectante. I.e.
+	\[
+		dW_1 = \delta_1 dt - \sigma dz
+		\tag{B.12}
+		\]
+	para $W_1 \in [-\infty, x_1]$. Cox y Miller [2, p. 223-225] han mostrado que tal proceso con $\delta_1 > 0$ tiene una distribución estacionaria no degenerada. Comparando (B.12) y (B.7), vemos que el término de deriva en $x$ es siempre al menos tan grande como el de $W_1$ en el intervalo $[-\infty, x_1]$. Por lo tanto, la probabilidad de que $x$ sea absorbido en $-\infty$ es no mayor que para $W_1$, y por lo tanto, $-\infty$ es una frontera inaccesible para $x$. Pero, $x = \log k$. Así, cero es una frontera inaccesible para el proceso $k$ con deriva $\delta_2$ y varianza $\sigma^2$ definido en el intervalo $[\overline{x}, \infty]$ donde $\overline{x}$ es una barrera reflectante. De nuevo, usando el análisis de Cox y Miller, $W_2$ tendrá una distribución estacionaria no degenerada siempre que $\delta_2 < 0$. Pero de (B.11), el término de deriva en $x$ será al menos tan negativo como $\delta_2$ en el intervalo $[\overline{x}, \infty]$, y por lo tanto $\infty$ es una frontera inaccesible para $k$. Por lo tanto, bajo las suposiciones del texto, ambas fronteras del proceso $k$ son inaccesibles y que existe una distribución estacionaria no trivial para $k$.
+	
+	Nota: como se mencionó en la nota al pie 1, p. 379, solo se requiere la suposición más débil de que $(n + \lambda - \frac{1}{2} \sigma^2) > 0$ usada en (B.9) para probar la existencia.
+	
+	Dado que las fronteras son inaccesibles, también tenemos que $m_2 = 0$ en (B.4). Una primera integral de (B.3) da
+	\[
+		\frac{1}{2} \frac{d}{dx} [a(x) \pi(x)] - b(x) \pi(x) = \frac{1}{2} m_2 = 0
+		\]
+	para una distribución estacionaria no degenerada. Usamos este resultado en el Apéndice C.
+	
+	Finalmente, la solución para la distribución estacionaria no degenerada puede escribirse como
+\[
+		\pi(x) = \frac{m}{a(x)} \exp \left[ 2 \int_0^x \frac{b(y)}{a(y)} dy \right]
+\] 
+	donde $m$ se elige de modo que $\int_0^\infty \pi(x) dx = 1$.
+\end{itemize}
+
+
+\end{document}
